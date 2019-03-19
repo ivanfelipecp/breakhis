@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 import torchvision
 import models
+import argparse
 
 from torch.autograd import Variable
 from torch.optim import Adam
@@ -31,6 +32,19 @@ def get_classes(dataset):
 	return 2 if dataset == "binary" in dataset else 8
 
 ###########
+#  Args  #
+###########	
+parser = argparse.ArgumentParser()
+parser.add_argument("--architecture")
+parser.add_argument("--epochs")
+parser.add_argument("--mag")
+parser.add_argument("--dataset")
+parser.add_argument("--batch_size")
+parser.add_argument("--lr")
+parser.add_argument("--classification")
+args = parser.parse_args()
+
+###########
 #  Paths  #
 ###########	
 
@@ -38,18 +52,19 @@ def get_classes(dataset):
 PATH = "../"
 
 # CSVs
-dataset = "binary"
-mag = 40
+dataset_class = args.classification
+mag = int(args.mag)
 
-train_csv = PATH + "csv/train_{}_{}.csv".format(mag, dataset)
-test_csv = PATH + "csv/test_{}_{}.csv".format(mag, dataset)
+train_csv = PATH + "csvs/train_{}_{}.csv".format(mag, dataset_class)
+test_csv = PATH + "csvs/test_{}_{}.csv".format(mag, dataset_class)
 
 # Results and directory
 directory = get_time()
 results_path = PATH + "results/" + directory + "/"
 
 # IMG path
-img_path = PATH + "dataset/breakhis/"
+dataset = args.dataset
+img_path = PATH + "datasets/" + dataset
 
 # Results file
 weights_file = "weights.pt"
@@ -64,32 +79,23 @@ os.mkdir(performance_path)
 #  Hyperpams #
 ##############
 
-num_classes = get_classes(dataset)
-batch_size = 32
-preprocessing = "color"
-lr = 0.001
-n_epochs = 50
+num_classes = get_classes(dataset_class)
+batch_size = int(args.batch_size)
+lr = float(args.lr)
+n_epochs = int(args.epochs)
 weight_file = None
-architecture = "densenet"
+architecture = args.architecture
 weighted = torch.FloatTensor([0.68, 0.32]).cuda() if (num_classes == 2) else torch.FloatTensor([.2, .09, .21, .13, .02, .13, .09, .13]).cuda()
 
-# Log the hyperparameters
-with open(results_path + "readme.txt","w") as file:
-	file.write("Model: {}\n".format(architecture))
-	file.write("Train and test files: {} and {}\n".format(train_csv, test_csv))
-	file.write("Image size: {}\n".format(img_size))
-	file.write("Preproccesing: {}\n".format(preprocessing))
-	file.write("Classes: {}\n".format(num_classes))
-	file.write("Train and test batches size: {}\n".format(batch_size))
-	file.write("Epochs: {}\n".format(n_epochs))
 
 ############################
 #  Model, Dataset & Loader #
 ############################
 
-(model, img_size) = get_model(num_classes, weight_file, architecture).cuda()
-train_dataset = BreakHis(train_csv ,img_path, preprocessing, img_size, True)
-test_dataset = BreakHis(test_csv, img_path, preprocessing, img_size, False)
+(model, img_size) = get_model(num_classes, weight_file, architecture)
+model = model.cuda()
+train_dataset = BreakHis(img_path, train_csv, img_size, training=True)
+test_dataset = BreakHis(img_path, test_csv, img_size, training=False)
 
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=10, shuffle=True)
@@ -98,16 +104,25 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=10, s
 #  Optimizer, criterion and performance #
 #########################################
 
-
 optimizer = Adam(model.parameters(), lr=lr)
 criterion = nn.CrossEntropyLoss(weight=weighted)
-performance = Performance(performance_path)
+performance = Performance(performance_path, num_classes)
+
+# Log the hyperparameters
+with open(results_path + "readme.txt","w") as file:
+	file.write("Architecture: {}\n".format(architecture))
+	file.write("Train and test files: {} and {}\n".format(train_csv, test_csv))
+	file.write("Image size: {}\n".format(img_size))
+	file.write("Classes: {}\n".format(num_classes))
+	file.write("Train and test batches size: {}\n".format(batch_size))
+	file.write("Epochs: {}\n".format(n_epochs))
 
 #######################
 #  Training & Testing #
 #######################
 
 best_model = 0
+
 
 for epoch in range(n_epochs):
 	print("Training epoch {}".format(epoch))
@@ -128,7 +143,6 @@ for epoch in range(n_epochs):
 		loss.backward()
 		
 		optimizer.step()
-	
 	###########
 	#   TEST  #
 	###########        
@@ -143,11 +157,12 @@ for epoch in range(n_epochs):
 		output = model(data)	
 		_, predict = torch.max(output, dim=1)
 		
-		performance.add_results(target.cpu().tolist(), predict.cpu().tolist(), patient_id.cpu().tolist(), output.cpu().tolist())
+		performance.add_results(target.cpu().tolist(), predict.cpu().tolist(), patient_id.tolist(), output.cpu().tolist())
 		test_loss += criterion(output, target).item()
 
 	test_loss =  test_loss / len(test_loader)
 	performance.loss = test_loss
+
 	###########
 	# Results #
 	###########  
@@ -159,3 +174,5 @@ for epoch in range(n_epochs):
 	if performance.accuracy > best_model:
 		best_model = performance.accuracy
 		torch.save(model.state_dict(), results_path+weights_file)
+
+	sys.exit(1)		

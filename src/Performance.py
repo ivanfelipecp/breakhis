@@ -4,15 +4,16 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 import scikitplot as skplt
+import warnings
 
 from sklearn.metrics import accuracy_score, roc_curve, auc, confusion_matrix
 from ConfusionMatrix import plot_confusion_matrix
 
 # ["B", "M"] if classes == 2 else ["A", "F", "PT", "TA", "DC", "LC", "MC", "PC"]    
 class Performance:
-	def __init__(self, path, dataset):
+	def __init__(self, path, n_classes):
 		self.path = path
-		self.n_classes = 2 if dataset == "binary" else 8
+		self.n_classes = n_classes
 		self.predicts_label = "predicts"
 		self.targets_label = "targets"
 		self.file_results = "results_"
@@ -145,6 +146,7 @@ class Performance:
 		return results
 
 	def map_float(self, array):
+		array = np.nan_to_num(array)
 		array = list(array)
 		return list(map(float, array))
 
@@ -186,7 +188,7 @@ class Performance:
 				targets[j] += patient[self.targets_label][j]
 				predicts[j] += patient[self.predicts_label][j]
 		return (targets, predicts)		
-
+"""
 performance = Performance(".", "mul")
 patients = [1] * 8 #+ [2] * 6
 targets =  [0,1,2,3,4,5,6,7] #+ [0,1,2,3,4,5]
@@ -202,3 +204,4 @@ performance.clear()
 performance.add_results(targets, predicts, patients, outputs)
 performance.loss = 0
 performance.end_epoch(0)
+"""

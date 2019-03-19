@@ -1,0 +1,1 @@
+python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset breakhis --batch_size 32 --lr 0.001 --classification binary

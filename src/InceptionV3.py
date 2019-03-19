@@ -11,7 +11,7 @@ def get_model(num_classes, weights=None):
 		nn.Linear(in_features=2048, out_features=num_classes, bias=True),
 		nn.Softmax(dim=1)
 	)
-
+	model.aux_logits = False
 	if not pre:
 		model.load_state_dict(torch.load(weights))
 		print("weights loaded")
