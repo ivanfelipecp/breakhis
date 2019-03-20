@@ -1,13 +1,16 @@
-import argparse
+import progressbar
+from time import sleep
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--model")
-parser.add_argument("--epochs")
-parser.add_argument("--mag")
-parser.add_argument("--dataset")
-parser.add_argument("--batch_size")
-parser.add_argument("--lr")
-parser.add_argument("--binary")
-args = parser.parse_args()
+n_epochs = 100
 
-print(args)
+epoch_bar = progressbar.ProgressBar(maxval=n_epochs, \
+    widgets=[progressbar.Bar('=', '[', ']'), '', progressbar.Percentage()])
+
+print("Process status")
+epoch_bar.start()
+
+
+for epoch in range(n_epochs):
+    epoch_bar.update(epoch)
+    sleep(0.1)
+epoch_bar.finish()

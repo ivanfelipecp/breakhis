@@ -10,6 +10,7 @@ import torch.nn as nn
 import torchvision
 import models
 import argparse
+import progressbar
 
 from torch.autograd import Variable
 from torch.optim import Adam
@@ -122,10 +123,14 @@ with open(results_path + "readme.txt","w") as file:
 #######################
 
 best_model = 0
+epoch_bar = progressbar.ProgressBar(maxval=n_epochs, \
+    widgets=[progressbar.Bar('=', '[', ']'), '', progressbar.Percentage()])
 
+epoch_bar.start()
 
 for epoch in range(n_epochs):
-	print("Training epoch {}".format(epoch))
+	epoch_bar.update(epoch)
+	#print("Training epoch {}".format(epoch))
 	###########
 	#  TRAIN  #
 	###########
@@ -150,7 +155,7 @@ for epoch in range(n_epochs):
 	performance.clear()
 	test_loss = 0
 	
-	print("Testing epoch {}".format(epoch))
+	#print("Testing epoch {}".format(epoch))
 	for batch_id, (data, target, patient_id) in enumerate(test_loader):
 
 		data, target = data.cuda(), target.cuda()		
@@ -175,4 +180,4 @@ for epoch in range(n_epochs):
 		best_model = performance.accuracy
 		torch.save(model.state_dict(), results_path+weights_file)
 
-	sys.exit(1)		
+epoch_bar.finish()
