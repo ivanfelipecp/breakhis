@@ -25,4 +25,14 @@ python3 -W ignore train.py --architecture squeezenet --epochs 100 --mag 40 --dat
 
 python3 -W ignore train.py --architecture squeezenet --epochs 100 --mag 40 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification multi
 
-
+Tabla multi class
+\begin{table}[H]
+\scalebox{0.75}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\begin{math}{}_{\text{\textbf{Architecture}} }\mkern-6mu\setminus\mkern-6mu{}^{\text{\textbf{Tumour class}} }\end{math} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{E} & \textbf{F} & \textbf{G} & \textbf{H} 
+\\ \hline
+InceptionV3 & 92.0 & 92.0 & 92.0 & 92.0 & 92.0 & 86.1 & 88.5 & 86.3 \\ \hline
+\end{tabular}}
+\caption{Patient level accuracy without preprocessing}
+\end{table}
