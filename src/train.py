@@ -113,6 +113,7 @@ performance = Performance(performance_path, num_classes)
 with open(results_path + "readme.txt","w") as file:
 	file.write("Architecture: {}\n".format(architecture))
 	file.write("Train and test files: {} and {}\n".format(train_csv, test_csv))
+	file.write("Dataset: {}".format(dataset))
 	file.write("Image size: {}\n".format(img_size))
 	file.write("Classes: {}\n".format(num_classes))
 	file.write("Train and test batches size: {}\n".format(batch_size))
