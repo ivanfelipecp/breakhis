@@ -1,3 +1,5 @@
 datasets/*
 results/*/
 *.txt
+src/__pycache__
+run.txt

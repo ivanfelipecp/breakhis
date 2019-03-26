@@ -7,7 +7,7 @@ def get_model(num_classes, weights=None):
 	model = models.densenet161(pretrained = pre)
 
 	#model.Conv2d_1a_3x3.conv = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
-	model.fc = nn.Sequential(
+	model.classifier = nn.Sequential(
 		nn.Linear(in_features=2048, out_features=num_classes, bias=True),
 		nn.Softmax(dim=1)
 	)

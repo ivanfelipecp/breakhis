@@ -4,7 +4,6 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 import scikitplot as skplt
-import warnings
 
 from sklearn.metrics import accuracy_score, roc_curve, auc, confusion_matrix
 from ConfusionMatrix import plot_confusion_matrix
