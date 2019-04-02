@@ -3,28 +3,13 @@
 ###########
 
 # normal dataset
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 200 --dataset breakhis --batch_size 32 --lr 0.0001 --classification binary
+python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 400 --dataset breakhis --batch_size 32 --lr 0.0001 --classification binary --preprocessing rgb
 
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 200 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi
+python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi --preprocessing CLAHE
 
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 200 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification binary
-
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 200 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification multi
+python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi --preprocessing HE
 
 
-python3 -W ignore train.py --architecture squeezenet --epochs 100 --mag 200 --dataset breakhis --batch_size 32 --lr 0.0001 --classification binary
+python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 400 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification binary
 
-python3 -W ignore train.py --architecture squeezenet --epochs 100 --mag 200 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi
-
-python3 -W ignore train.py --architecture squeezenet --epochs 100 --mag 200 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification binary
-
-python3 -W ignore train.py --architecture squeezenet --epochs 100 --mag 200 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification multi
-
-
-python3 -W ignore train.py --architecture inceptionv3 --epochs 100 --mag 200 --dataset breakhis --batch_size 32 --lr 0.0001 --classification binary
-
-python3 -W ignore train.py --architecture inceptionv3 --epochs 100 --mag 200 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi
-
-python3 -W ignore train.py --architecture inceptionv3 --epochs 100 --mag 200 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification binary
-
-python3 -W ignore train.py --architecture inceptionv3 --epochs 100 --mag 200 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification multi
+python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 400 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification multi

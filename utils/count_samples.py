@@ -11,46 +11,45 @@ M_CLASS = {
 	"7": "PC"
 }
 
-count_classes = {
-	"0": 0,
-	"1": 0,
-	"2": 0,
-	"3": 0,
-	"4": 0,
-	"5": 0,
-	"6": 0,
-	"7": 0
-}
+def get_c():
+	return  {
+		"0": 0,
+		"1": 0,
+		"2": 0,
+		"3": 0,
+		"4": 0,
+		"5": 0,
+		"6": 0,
+		"7": 0
+	}
 
-total = count_classes.copy()
-percs = count_classes.copy()
-files = ["train_40_multi.csv", "test_40_multi.csv"]
-M = 0
+
+total = get_c()
+percs = get_c()
+files = ["../csvs/train_100_multi.csv", "../csvs/test_100_multi.csv"]
+
 
 print("Tipos de cancer: ", M_CLASS, "\n")
-for f in files:
-	count = count_classes.copy()
-	with open(f, "r") as file:
-		reader = csv.DictReader(file, fieldnames=["file","class"])
-		next(reader)
-		for row in reader:
-			count[row["class"]] += 1
-			total[row["class"]] += 1
-			M += 1
-		print(f)
-		print(count)
-		print("\n")
+for i in ["40", "100", "200", "400"]:
+	total = get_c()
+	M = 0
+	files = ["../csvs/train_{}_multi.csv".format(i), "../csvs/test_{}_multi.csv".format(i)]
+	for f in files:
+		count = get_c()
+		with open(f, "r") as file:
+			reader = csv.DictReader(file, fieldnames=["file","class"])
+			next(reader)
+			for row in reader:
+				count[row["class"]] += 1
+				total[row["class"]] += 1
+				M += 1
+			print(f)
+			print(count)
+			print("\n")
 
-print("train+test")
-print(total)
-print("Total muestras: ", M, "\n")
-print("Porcentajes")
-custom = count_classes.copy()
-for i in total.keys():
-	p = total[i]/M
-	percs[i] += p
-	custom[i] = 1/8
-custom    
-print(percs)
-print(custom)
-
+	print("train+test")
+	print(total)
+	for i in total.keys():
+		print(M_CLASS[i],total[i])
+	print("Total muestras: ", M, "\n")
+	print("Porcentajes")

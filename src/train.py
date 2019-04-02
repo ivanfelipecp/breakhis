@@ -43,6 +43,7 @@ parser.add_argument("--dataset")
 parser.add_argument("--batch_size")
 parser.add_argument("--lr")
 parser.add_argument("--classification")
+parser.add_argument("--preprocessing")
 args = parser.parse_args()
 
 ###########
@@ -95,11 +96,13 @@ weighted = torch.FloatTensor([0.68, 0.32]).cuda() if (num_classes == 2) else tor
 
 (model, img_size) = get_model(num_classes, weight_file, architecture)
 model = model.cuda()
-train_dataset = BreakHis(img_path, train_csv, img_size, training=True)
-test_dataset = BreakHis(img_path, test_csv, img_size, training=False)
+
+preprocessing = args.preprocessing
+train_dataset = BreakHis(img_path, train_csv, img_size, training=True, preprocessing=preprocessing)
+test_dataset = BreakHis(img_path, test_csv, img_size, training=False, preprocessing=preprocessing)
 
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=10, shuffle=True)
+test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=True)
 
 #########################################
 #  Optimizer, criterion and performance #
@@ -114,6 +117,7 @@ with open(results_path + "readme.txt","w") as file:
 	file.write("Architecture: {}\n".format(architecture))
 	file.write("Train and test files: {} and {}\n".format(train_csv, test_csv))
 	file.write("Dataset: {} \n".format(dataset))
+	file.write("Preprocessing: {} \n".format(preprocessing))
 	file.write("Image size: {}\n".format(img_size))
 	file.write("Classes: {}\n".format(num_classes))
 	file.write("Train and test batches size: {}\n".format(batch_size))
