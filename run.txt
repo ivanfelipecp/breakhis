@@ -5,7 +5,9 @@
 # normal dataset
 python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 400 --dataset breakhis --batch_size 32 --lr 0.0001 --classification binary --preprocessing rgb
 
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi --preprocessing CLAHE
+
+
+python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset DNLM_1 --batch_size 32 --lr 0.0001 --classification multi --preprocessing RGB
 
 python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi --preprocessing HE
 

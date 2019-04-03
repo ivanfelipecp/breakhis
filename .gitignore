@@ -1,4 +1,6 @@
-datasets/*
+datasets/breakhis
+datasets/DNLM_1
+datasets/um_breakhis
 results/*/
 *.txt
 src/__pycache__
