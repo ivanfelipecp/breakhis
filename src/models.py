@@ -3,6 +3,7 @@ import DenseNet161
 import TraditionalCNN
 import SqueezeNet
 import FractalNet
+import TraditionalV2
 
 def get_model(num_classes, weights=None, m=1):
 	model = None
@@ -21,5 +22,7 @@ def get_model(num_classes, weights=None, m=1):
 		img_size = 256
 	elif m == "fractalnet":
 		model = FractalNet.get_model
+	elif m == "traditionalv2"		:
+		model = TraditionalV2.get_model
 
 	return (model(num_classes, weights), img_size)

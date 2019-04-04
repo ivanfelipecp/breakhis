@@ -1,17 +1,54 @@
-###########
-#PRUEBAS 1#
-###########
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 22 --lr 0.0001 --classification multi --kfold 0 --preprocessing RGB
 
-# normal dataset
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 400 --dataset breakhis --batch_size 32 --lr 0.0001 --classification binary --preprocessing rgb
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 1 --preprocessing RGB
 
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 2 --preprocessing RGB
 
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 3 --preprocessing RGB
 
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset DNLM_1 --batch_size 32 --lr 0.0001 --classification multi --preprocessing RGB
-
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 40 --dataset breakhis --batch_size 32 --lr 0.0001 --classification multi --preprocessing HE
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 4 --preprocessing RGB
 
 
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 400 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification binary
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 0 --preprocessing HE
 
-python3 -W ignore train.py --architecture traditionalcnn --epochs 100 --mag 400 --dataset um_breakhis --batch_size 32 --lr 0.0001 --classification multi
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 1 --preprocessing HE
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 2 --preprocessing HE
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 3 --preprocessing HE
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 4 --preprocessing HE
+
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 0 --preprocessing CLAHE
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 1 --preprocessing CLAHE
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 2 --preprocessing CLAHE
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 3 --preprocessing CLAHE
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 4 --preprocessing CLAHE
+
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset um_breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 0 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset um_breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 1 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset um_breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 2 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset um_breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 3 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset um_breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 4 --preprocessing RGB
+
+
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset DNLM_1 --batch_size 28 --lr 0.0001 --classification multi --kfold 0 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset DNLM_1 --batch_size 28 --lr 0.0001 --classification multi --kfold 1 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset DNLM_1 --batch_size 28 --lr 0.0001 --classification multi --kfold 2 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset DNLM_1 --batch_size 28 --lr 0.0001 --classification multi --kfold 3 --preprocessing RGB
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset DNLM_1 --batch_size 28 --lr 0.0001 --classification multi --kfold 4 --preprocessing RGB
