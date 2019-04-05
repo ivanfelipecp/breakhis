@@ -1,4 +1,8 @@
-python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 22 --lr 0.0001 --classification multi --kfold 0 --preprocessing RGB
+squeeze y traditionalv2 -> 28 batch batch_size
+densenet161 -> 18
+
+
+python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 0 --preprocessing RGB
 
 python3 -W ignore trainv2.py --architecture squeezenet --epochs 100 --mag 40 --dataset breakhis --batch_size 28 --lr 0.0001 --classification multi --kfold 1 --preprocessing RGB
 
